@@ -1,0 +1,17 @@
+{
+  "name": "opg-sirius-maintenance",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Greg Tyler <greg.tyler@digital.justice.gov.uk>",
+  "license": "MIT",
+  "scripts": {
+    "build": "sass ./assets:./static"
+  },
+  "dependencies": {
+    "@ministryofjustice/frontend": "^1.0.0",
+    "govuk-frontend": "^3.14.0"
+  },
+  "devDependencies": {
+    "sass": "^1.43.4"
+  }
+}
