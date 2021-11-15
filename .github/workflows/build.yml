@@ -160,7 +160,7 @@ jobs:
       - name: Push Tag to Parameter Store
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          aws ssm put-parameter --name "opg-sirius-maintenance-latest-green-build" --type "String" --value "${{ needs.push.outputs.tag}}" --overwrite --region=eu-west-1
+          aws ssm put-parameter --name "opg-sirius-maintenance-latest-green-build" --type "String" --value "${{ steps.bump_version.outputs.tag }}" --overwrite --region=eu-west-1
 
       - name: Trigger Dev Deploy
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
