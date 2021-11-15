@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  app:
+    image: sirius-maintenance:latest
+    build: .
+    ports: ["8888:8080"]
