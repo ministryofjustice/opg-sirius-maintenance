@@ -157,12 +157,27 @@ jobs:
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.bump_version.outputs.tag }}
           fi
 
+  push-tags:
+    runs-on: ubuntu-latest
+    needs: push
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ACTIONS }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ACTIONS }}
+          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::997462338508:role/sirius-actions-ci
+          role-duration-seconds: 3600
+          role-session-name: GitHubActions
+
       - name: Push Tag to Parameter Store
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           aws ssm put-parameter --name "opg-sirius-maintenance-latest-green-build" --type "String" --value "${{ steps.bump_version.outputs.tag }}" --overwrite --region=eu-west-1
 
       - name: Trigger Dev Deploy
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         shell: bash
         run: curl -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/Deploy_to_Development/build?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&cause=Triggered+by+opg-sirius-maintenance"
