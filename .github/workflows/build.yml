@@ -54,7 +54,7 @@ jobs:
           docker run -d -p 8888:8080 --rm sirius-maintenance:latest
       - name: Check content
         run: |
-          curl -s localhost:8888 | grep "Sirius is currently unavailable"
+          curl -s localhost:8888 | grep '<h1 class="govuk-heading-xl">Sirius is currently unavailable</h1>'
       - name: Clean up
         run: |
           docker stop $(docker ps -aq -f="ancestor=sirius-maintenance:latest")
