@@ -37,6 +37,15 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/health-check", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+
+		_, writeErr := w.Write([]byte("Sirius maintenance healthy"))
+		if writeErr != nil {
+			log.Printf("Error when writing response: %s", writeErr)
+		}
+	})
+
 	log.Printf("Running on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
