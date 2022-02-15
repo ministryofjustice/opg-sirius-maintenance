@@ -40,9 +40,7 @@ func main() {
 	http.HandleFunc("/health-check", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 
-		var writeErr error
-
-		_, writeErr = w.Write([]byte("Sirius maintenance healthy"))
+		_, writeErr := w.Write([]byte("Sirius maintenance healthy"))
 		if writeErr != nil {
 			log.Printf("Error when writing response: %s", writeErr)
 		}
