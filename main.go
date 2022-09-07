@@ -1,10 +1,10 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusServiceUnavailable)
 
-		data, err := ioutil.ReadFile("./static/index.html")
+		data, err := os.ReadFile("./static/index.html")
 
 		var writeErr error
 
@@ -46,6 +46,11 @@ func main() {
 		}
 	})
 
+	server := &http.Server{
+		Addr:              ":" + port,
+		ReadHeaderTimeout: 10 * time.Second,
+	}
+
 	log.Printf("Running on port %s", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(server.ListenAndServe())
 }
