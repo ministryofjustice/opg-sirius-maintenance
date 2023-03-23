@@ -7,6 +7,9 @@ lint:
 build:
 	docker-compose build app
 
+scan:
+	trivy image sirius-maintenance:latest
+
 security-test:
 	docker run --rm -it -e GO111MODULE=on -w /maintenance/ -v $(PWD)/:/maintenance securego/gosec /maintenance/...
 
