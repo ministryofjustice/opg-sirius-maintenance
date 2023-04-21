@@ -101,7 +101,7 @@ jobs:
           fetch-depth: '0'
       - name: Extract branch name
         run: |
-          if [ "$GITHUB_EVENT_NAME" == "push" ]; then
+          if [ "${{ github.head_ref }}" == "" ]; then
             echo BRANCH_NAME=main >> $GITHUB_ENV
           else
             echo BRANCH_NAME=${{ github.head_ref }} >> $GITHUB_ENV
