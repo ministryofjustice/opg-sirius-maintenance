@@ -1,20 +1,26 @@
 export DOCKER_BUILDKIT=1
-all: lint build security-test test
+all: lint gosec build scan test
 
-lint:
-	docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:v1.43.0 golangci-lint run -v
+lint: setup-directories
+	docker compose run --rm go-lint
+
+gosec:
+	docker compose run --rm gosec
 
 build:
-	docker-compose build app
+	docker compose build maintenance
 
-scan:
-	trivy image sirius-maintenance:latest
+test-results:
+	mkdir -p -m 0777 .trivy-cache .cache test-results
 
-security-test:
-	docker run --rm -it -e GO111MODULE=on -w /maintenance/ -v $(PWD)/:/maintenance securego/gosec /maintenance/...
+setup-directories: test-results
+
+scan: setup-directories
+	docker compose run --rm trivy image --format table --exit-code 0 sirius-maintenance:latest
+	docker compose run --rm trivy image --format sarif --output /test-results/trivy.sarif --exit-code 1 sirius-maintenance:latest
 
 test:
-	docker-compose up -d
+	docker compose up -d
 	curl -s localhost:8888 | grep '<h1 class="govuk-heading-xl">Sirius is currently unavailable</h1>'
 	curl -s -f localhost:8888/health-check
-	docker-compose down
+	docker compose down

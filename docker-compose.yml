@@ -1,7 +1,29 @@
 version: "3.8"
 
 services:
-  app:
+  maintenance:
     image: sirius-maintenance:latest
     build: .
     ports: ["8888:8080"]
+
+  gosec:
+    image: securego/gosec:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: -exclude-dir=.gocache /app/...
+
+  go-lint:
+    image: golangci/golangci-lint:v1.53.3
+    working_dir: /go/src/app
+    volumes:
+      - ./:/go/src/app
+      - ./.cache/golangci-lint/v1.53.3:/root/.cache
+    command: golangci-lint run -v --timeout 5m
+
+  trivy:
+    image: aquasec/trivy:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.trivy-cache:/root/.cache
+      - ./test-results:/test-results
