@@ -24,24 +24,21 @@ jobs:
         with:
           path: /tmp/images
           key: ${{ runner.os }}-images-${{ github.run_id }}-${{ github.run_number }}
+
       - name: Build Images
         run: |
-          docker-compose build --parallel app
+          make build
           mkdir -p /tmp/images
           docker save -o /tmp/images/app.tar sirius-maintenance:latest
+
       - name: Trivy Image Vulnerability Scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: sirius-maintenance:latest
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
+        run: make scan
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'test-results/trivy.sarif'
 
   lint:
     name: Lint
@@ -49,13 +46,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run linting
-        uses: golangci/golangci-lint-action@v2
+        run: make lint
 
   test:
     name: Test
     needs: ['build']
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Cache Images
         uses: actions/cache@v2
         with:
@@ -64,28 +62,16 @@ jobs:
       - name: Restore Image
         run: |
           docker load -i /tmp/images/app.tar
-          docker run -d -p 8888:8080 --rm sirius-maintenance:latest
-      - name: Check content
-        run: |
-          curl -s localhost:8888 | grep '<h1 class="govuk-heading-xl">Sirius is currently unavailable</h1>'
-      - name: Check health-check
-        run: |
-          curl -s -f localhost:8888/health-check
-      - name: Clean up
-        run: |
-          docker stop $(docker ps -aq -f="ancestor=sirius-maintenance:latest")
+      - name: Test App
+        run: make test
 
   security-test:
     name: Security test
     runs-on: ubuntu-latest
-    env:
-      GO111MODULE: on
     steps:
       - uses: actions/checkout@v2
       - name: Run Gosec Security Scanner
-        uses: securego/gosec@master
-        with:
-          args: ./...
+        run: make gosec
 
   push:
     name: Build & Push Containers
@@ -99,6 +85,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
+
       - name: Extract branch name
         run: |
           if [ "${{ github.head_ref }}" == "" ]; then
@@ -114,6 +101,7 @@ jobs:
         with:
           path: /tmp/images
           key: ${{ runner.os }}-images-${{ github.run_id }}-${{ github.run_number }}
+
       - name: Restore Image
         run: |
           docker load -i /tmp/images/app.tar
@@ -144,27 +132,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registries: 311462405659
-
-      - name: Tag Container
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: sirius/maintenance
-        run: |
-          docker tag sirius-maintenance:latest $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.bump_version.outputs.tag }}
-
-      - name: Trivy Image Vulnerability Scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ steps.login-ecr.outputs.registry }}/sirius/maintenance:${{ steps.bump_version.outputs.tag }}
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        if: always()
-        with:
-          sarif_file: 'trivy-results.sarif'
 
       - name: Push Container
         env:
