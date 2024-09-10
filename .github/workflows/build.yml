@@ -142,6 +142,7 @@ jobs:
           if [ $BRANCH_NAME == "main" ]; then
             docker tag sirius-maintenance:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
             docker tag sirius-maintenance:latest $ECR_REGISTRY/$ECR_REPOSITORY:main-${{ steps.bump_version.outputs.tag }}
+            docker tag sirius-maintenance:latest $ECR_REGISTRY/$ECR_REPOSITORY:main-${{ steps.bump_version.outputs.tag }}-$(date +"%Y%m%d%H%M%S")
             # We want all of the tags pushed
             docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           else
