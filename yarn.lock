@@ -63,10 +63,10 @@ glob-parent@~5.1.2:
   dependencies:
     is-glob "^4.0.1"
 
-govuk-frontend@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-4.4.1.tgz#88857c4ad8508255a4e983030a3964d6e1674107"
-  integrity sha512-Jm1LUWiH9vy47b6HSH/ksSb4ueBrtTTgyLBk+3X2qqAmmFUc1AXWLSYHid07YYu1tvn9RnodWk5Bac5Ywqk6tA==
+govuk-frontend@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.9.0.tgz#4064ac692019e60f030d6311c49330a6454a5689"
+  integrity sha512-8NzmyoDtRFYyHs413DfNPR8Zo6qw6Q02Mruxml/Yfy+EueaOI/JZ4gVM8d0pqzJmTiMcJuHhvxqYEgBRmqeoyA==
 
 is-binary-path@~2.1.0:
   version "2.1.0"
