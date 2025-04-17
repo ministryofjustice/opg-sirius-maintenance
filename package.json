@@ -8,8 +8,8 @@
     "build": "sass ./assets:./static"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^1.0.1",
-    "govuk-frontend": "^4.4.1"
+    "@ministryofjustice/frontend": "^5.0.0",
+    "govuk-frontend": "^5.0.0"
   },
   "devDependencies": {
     "sass": "^1.43.4"
