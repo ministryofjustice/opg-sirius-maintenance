@@ -5,7 +5,7 @@
   "author": "Greg Tyler <greg.tyler@digital.justice.gov.uk>",
   "license": "MIT",
   "scripts": {
-    "build": "sass ./assets:./static"
+    "build": "sass --load-path . --style compressed ./assets:./static"
   },
   "dependencies": {
     "@ministryofjustice/frontend": "^5.0.0",
