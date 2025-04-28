@@ -3,4 +3,5 @@ node_modules
 .cache
 .trivy-cache
 test-results
-
+static
+!static/index.html
