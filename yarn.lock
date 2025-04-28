@@ -2,12 +2,10 @@
 # yarn lockfile v1
 
 
-"@ministryofjustice/frontend@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-1.0.1.tgz#c0f9cc3e2f10dbeaff90fe40439cd37a63de53cf"
-  integrity sha512-YpPxyo72z5Zx0igRmtTmLPM+z0LgR3WNODZBAss9ZSafGg2xXXRnyK1a3tBZhjEUIlWH7atn/1DXFQN6v2gk1A==
-  dependencies:
-    moment "^2.27.0"
+"@ministryofjustice/frontend@^5.0.0":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.1.2.tgz#0eb44cd9f1e2e322dd24792f1e2bd66f8f4b56da"
+  integrity sha512-ZpxmefOMLdm4CQGctz4KLIlbgJGHTjhJXohKAygZoA+/pP+paGmbeGIDkdjW7wRF5etld+ERZ9yqNeoMmm+VAw==
 
 anymatch@~3.1.2:
   version "3.1.2"
@@ -63,10 +61,10 @@ glob-parent@~5.1.2:
   dependencies:
     is-glob "^4.0.1"
 
-govuk-frontend@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-4.4.1.tgz#88857c4ad8508255a4e983030a3964d6e1674107"
-  integrity sha512-Jm1LUWiH9vy47b6HSH/ksSb4ueBrtTTgyLBk+3X2qqAmmFUc1AXWLSYHid07YYu1tvn9RnodWk5Bac5Ywqk6tA==
+govuk-frontend@^5.0.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.9.0.tgz#4064ac692019e60f030d6311c49330a6454a5689"
+  integrity sha512-8NzmyoDtRFYyHs413DfNPR8Zo6qw6Q02Mruxml/Yfy+EueaOI/JZ4gVM8d0pqzJmTiMcJuHhvxqYEgBRmqeoyA==
 
 is-binary-path@~2.1.0:
   version "2.1.0"
@@ -91,11 +89,6 @@ is-number@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
-
-moment@^2.27.0:
-  version "2.29.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
