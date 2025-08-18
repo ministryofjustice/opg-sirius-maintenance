@@ -6,6 +6,15 @@
         "helpers:pinGitHubActionDigests"
     ],
     "branchPrefix": "renovate-",
+    "branchNameStrict": true,
+    "commitMessageAction": "Renovate Update",
+    "labels": [
+        "Dependencies",
+        "Renovate"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true
+    },
     "packageRules": [
         {
             "automerge": true,
@@ -15,21 +24,27 @@
                 "minor",
                 "patch"
             ],
+            "prPriority": 1,
             "schedule": "* 0-6 1 * *",
             "minimumReleaseAge": "3 days",
             "matchPackageNames": [
                 "*"
             ]
-        },
-        {
-            "groupName": "Major Updates",
-            "groupSlug": "all-major-updates",
-            "matchUpdateTypes": [
-                "major"
-            ],
-            "matchPackageNames": [
-                "*"
-            ]
         }
-    ]
+    ],
+    "major": {
+        "labels": [
+            "Dependencies",
+            "Renovate"
+        ]
+    },
+    "vulnerabilityAlerts": {
+        "groupName": "Vulnerability Patches",
+        "dependencyDashboardApproval": false,
+        "minimumReleaseAge": null,
+        "rangeStrategy": "update-lockfile",
+        "commitMessagePrefix": "[SECURITY]",
+        "branchTopic": "{{{datasource}}}-{{{depName}}}-vulnerability",
+        "prCreation": "immediate"
+    }
 }
