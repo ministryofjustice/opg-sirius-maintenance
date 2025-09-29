@@ -3,9 +3,9 @@
 
 
 "@ministryofjustice/frontend@^5.0.0":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.1.5.tgz#f251aad828ebf644c1027aa0b938737d3f2cc2d0"
-  integrity sha512-qplsAEv1+8FeMxrBh+Z9NznX4LjZBTRBZubMlUqWKntBasssz5mp7rF/C8VeiuJhMtfOgB3YYDvxoahSQaoKGw==
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.2.1.tgz#811fc89736daa954a49a71d297d2b2ca14bf1bd1"
+  integrity sha512-6P79TnIZnmntuFoGDSY+suOtgSBmCd4cGFfzImspvYhL4GjXFR9zjWrPt33Dem2wONAA96OQNUpKqScTV74yvQ==
 
 "@parcel/watcher-android-arm64@2.5.1":
   version "2.5.1"
@@ -123,9 +123,9 @@ fill-range@^7.1.1:
     to-regex-range "^5.0.1"
 
 govuk-frontend@^5.0.0:
-  version "5.11.2"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.11.2.tgz#4c6f5f9617636c002f27c99ba62d2631be7ed19f"
-  integrity sha512-eHV8EMxYNjc+omFhB0HktQ3QmA3ZRdDsgRDlUIik+TpUHerR3XKXpo4zh/OGO2/C2mz65cX0XT0k4QrRFJZU8Q==
+  version "5.12.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.12.0.tgz#315e460c2556ff076ff7b4150e1c7aae371df23b"
+  integrity sha512-gNr/UVDoORVOqVKTC9i9HOKKPeM4IDTAqtnd3t6U8LQibEr+8Q+FB7Id0u/MfR/5mqPfenG/+VGLW96vJXok/g==
 
 immutable@^5.0.2:
   version "5.1.3"
@@ -173,9 +173,9 @@ readdirp@^4.0.1:
   integrity sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==
 
 sass@^1.43.4:
-  version "1.92.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.92.1.tgz#07fb1fec5647d7b712685d1090628bf52456fe86"
-  integrity sha512-ffmsdbwqb3XeyR8jJR6KelIXARM9bFQe8A6Q3W4Klmwy5Ckd5gz7jgUNHo4UOqutU5Sk1DtKLbpDP0nLCg1xqQ==
+  version "1.93.2"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.93.2.tgz#e97d225d60f59a3b3dbb6d2ae3c1b955fd1f2cd1"
+  integrity sha512-t+YPtOQHpGW1QWsh1CHQ5cPIr9lbbGZLZnbihP/D/qZj/yuV68m8qarcV17nvkOX81BCrvzAlq2klCQFZghyTg==
   dependencies:
     chokidar "^4.0.0"
     immutable "^5.0.2"
