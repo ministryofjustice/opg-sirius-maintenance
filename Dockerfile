@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.12 as asset-env
+FROM node:16.13.0-alpine3.12 AS asset-env
 
 WORKDIR /app
 
@@ -8,8 +8,9 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.25 as build-env
+FROM golang:1.25 AS build-env
 
+ARG TARGETARCH
 WORKDIR /app
 
 COPY go.mod .
@@ -19,7 +20,7 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /go/bin/opg-sirius-maintenance
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -a -installsuffix cgo -o /go/bin/opg-sirius-maintenance
 
 FROM alpine:3
 
