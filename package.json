@@ -8,7 +8,7 @@
     "build": "sass --load-path . --style compressed ./assets:./static"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^5.0.0",
+    "@ministryofjustice/frontend": "^8.0.0",
     "govuk-frontend": "^5.0.0"
   },
   "devDependencies": {
