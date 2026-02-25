@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -11,7 +12,12 @@ func main() {
 	port := "8080"
 
 	if value := os.Getenv("PORT"); value != "" {
-		port = value
+		// Validate port
+		if _, err := strconv.Atoi(value); err == nil {
+			port = value
+		} else {
+			log.Printf("Invalid PORT value, using default port %s", port)
+		}
 	}
 
 	http.HandleFunc("/main.css", func(w http.ResponseWriter, r *http.Request) {
