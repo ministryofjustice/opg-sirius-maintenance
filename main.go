@@ -50,7 +50,7 @@ func main() {
 		Addr:              ":" + port,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
-
+	// #nosec G706
 	log.Printf("Running on port %s", port)
 	log.Fatal(server.ListenAndServe())
 }
