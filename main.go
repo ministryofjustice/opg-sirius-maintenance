@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -11,7 +12,11 @@ func main() {
 	port := "8080"
 
 	if value := os.Getenv("PORT"); value != "" {
-		port = value
+		if _, err := strconv.Atoi(value); err == nil {
+			port = value
+		} else {
+			log.Printf("Invalid PORT value, using default port %s", port)
+		}
 	}
 
 	http.HandleFunc("/main.css", func(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +55,8 @@ func main() {
 		Addr:              ":" + port,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
-	// #nosec G706
+
+	// #nosec G706 -- port is validated as integer, preventing log injection
 	log.Printf("Running on port %s", port)
 	log.Fatal(server.ListenAndServe())
 }
