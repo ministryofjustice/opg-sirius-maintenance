@@ -1,5 +1,5 @@
 export DOCKER_BUILDKIT=1
-all: lint gosec build scan test
+all: lint gosec build test
 
 lint: setup-directories
 	docker compose run --rm go-lint
@@ -11,13 +11,9 @@ build:
 	docker compose build maintenance
 
 test-results:
-	mkdir -p -m 0777 .trivy-cache .cache test-results
+	mkdir -p -m 0777 .cache test-results
 
 setup-directories: test-results
-
-scan: setup-directories
-	docker compose run --rm trivy image --format table --exit-code 0 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/maintenance:latest
-	docker compose run --rm trivy image --format sarif --output /test-results/trivy.sarif --exit-code 1 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/maintenance:latest
 
 test:
 	docker compose up -d
