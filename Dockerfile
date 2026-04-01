@@ -8,7 +8,7 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.25 AS build-env
+FROM golang:1.26 AS build-env
 
 ARG TARGETARCH
 WORKDIR /app
