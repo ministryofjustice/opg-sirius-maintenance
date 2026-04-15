@@ -30,7 +30,7 @@ RUN apk --update --no-cache add \
     ca-certificates \
     && rm -rf /var/cache/apk/*
 RUN apk --no-cache add tzdata
-RUN apk upgrade --no-cache busybox libcrypto3 libssl3 zlib
+RUN apk upgrade --no-cache busybox libcrypto3 libssl3 musl musl-utils zlib
 
 COPY --from=build-env /go/bin/opg-sirius-maintenance opg-sirius-maintenance
 COPY --from=build-env /app/static static
