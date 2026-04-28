@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ministryofjustice/frontend@^8.0.0":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-8.0.1.tgz#e349ebb586badddd20e3bc5f5c0f7c2ebc66c362"
-  integrity sha512-IPgCcNe+XKV55I4J/SIoYAkfYp7mmUKjO1igXhzOtcF05+stWPbJuL9QzKORlRUxkwZtQ1jmiY7PZxMQzOXniw==
+"@ministryofjustice/frontend@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-9.0.0.tgz#c106740ccc681744f2a62616101b9dd2ff57202a"
+  integrity sha512-R63EvHq//lONAhpUfZCMfxlUHoysDx5Hc6mi9EEV+sfVGm2spGV52PJAkYCYAc3bhTaTiJDtEM+PXgJm0iTWvQ==
 
 "@parcel/watcher-android-arm64@2.5.6":
   version "2.5.6"
@@ -108,10 +108,10 @@ detect-libc@^2.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.1.2.tgz#689c5dcdc1900ef5583a4cb9f6d7b473742074ad"
   integrity sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==
 
-govuk-frontend@^5.0.0:
-  version "5.14.0"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.14.0.tgz#d93f1ffa88b0696114509cab86e4ea474006f8e0"
-  integrity sha512-MgfaXswIM6KpXS2T5gltEnzgVLgfM3UoE9+rYkhBiR0suaJ8Let31VZXQZqz9QhiPDbv28fW1nRjIyLujfZIBA==
+govuk-frontend@^6.0.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-6.1.0.tgz#7022bede1d72f6c63f6bf43f16f3d207c6f1214e"
+  integrity sha512-sqivexZFa82LiDIDVMItsUlqEXE/wEUWWBqzEoxHvUFLBH7bY0C8lVrj1qsDThSnj5JEUMS7isBAbKnfQ5Qp6g==
 
 immutable@^5.1.5:
   version "5.1.5"
