@@ -33,7 +33,7 @@ jobs:
 
   build:
     name: Build Sirius Maintenace
-    uses: ministryofjustice/opg-github-workflows/.github/workflows/build-multi-architecture-image.yml@f567efb2782f73a972073276a00bc4bcf92a3728 # v3.19.2
+    uses: ministryofjustice/opg-github-workflows/.github/workflows/build-multi-architecture-image.yml@17ca444d0b23a0f9f6c612f1bfb8dc9be358f235 # v3.19.6
     with:
       image_name: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/maintenance
 
@@ -111,7 +111,7 @@ jobs:
           registries: 311462405659
 
       - name: Snyk Scan
-        uses: ministryofjustice/opg-github-actions/actions/snyk-scan@ceeda9d30ec7f6705c819d0b7664b9a79df99a3b # v4.8.0
+        uses: ministryofjustice/opg-github-actions/actions/snyk-scan@9e8b7c2fb29c11e77b12913f74459fa48b11829f # v4.8.2
         with:
           SNYK_TEST_IMAGE: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/maintenance:latest
           SNYK_TOKEN: ${{ secrets.SNYK_OPG_ORG_TOKEN }}
