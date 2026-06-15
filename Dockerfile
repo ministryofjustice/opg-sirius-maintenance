@@ -8,7 +8,7 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.25 AS build-env
+FROM golang:1.25@sha256:379065f16fe8cce7949001ba9cffc827cd4b93d69495dec405befd1c13e19bb3 AS build-env
 
 ARG TARGETARCH
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -a -installsuffix cgo -o /go/bin/opg-sirius-maintenance
 
-FROM alpine:3
+FROM alpine:3@sha256:a2d49ea686c2adfe3c992e47dc3b5e7fa6e6b5055609400dc2acaeb241c829f4
 
 WORKDIR /go/bin
 
