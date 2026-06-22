@@ -8,7 +8,7 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.25@sha256:379065f16fe8cce7949001ba9cffc827cd4b93d69495dec405befd1c13e19bb3 AS build-env
+FROM golang:1.26@sha256:792443b89f65105abba56b9bd5e97f680a80074ac62fc844a584212f8c8102c3 AS build-env
 
 ARG TARGETARCH
 WORKDIR /app
