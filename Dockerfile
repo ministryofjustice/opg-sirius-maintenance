@@ -8,7 +8,16 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.25@sha256:379065f16fe8cce7949001ba9cffc827cd4b93d69495dec405befd1c13e19bb3 AS build-env
+FROM golang:1.26@sha256:87a41d2539e5671777734e91f467499ed5eafb1fb1f77221dff2744db7a51775 AS build-env
+
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid 65532 \
+    app
 
 ARG TARGETARCH
 WORKDIR /app
@@ -22,23 +31,28 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -a -installsuffix cgo -o /go/bin/opg-sirius-maintenance
 
-FROM alpine:3@sha256:a2d49ea686c2adfe3c992e47dc3b5e7fa6e6b5055609400dc2acaeb241c829f4
+FROM build-env AS healthcheck-build
+WORKDIR /app
+
+COPY healthcheck healthcheck
+
+WORKDIR /app/healthcheck
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /go/bin/healthcheck
+
+FROM scratch
 
 WORKDIR /go/bin
 
-RUN apk --update --no-cache add \
-    ca-certificates \
-    && rm -rf /var/cache/apk/*
-RUN apk --no-cache add tzdata
-RUN apk upgrade --no-cache busybox libcrypto3 libssl3 musl musl-utils zlib
+COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=build-env /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=build-env /etc/passwd /etc/passwd
+COPY --from=build-env /etc/group /etc/group
 
 COPY --from=build-env /go/bin/opg-sirius-maintenance opg-sirius-maintenance
+COPY --from=healthcheck-build /go/bin/healthcheck healthcheck
 COPY --from=build-env /app/static static
 COPY --from=asset-env /app/static static
 
-
-RUN addgroup -S app && \
-    adduser -S -g app app && \
-    chown -R app:app opg-sirius-maintenance static
 USER app
+HEALTHCHECK --interval=5s --timeout=5s --start-period=5s --retries=5 CMD [ "/go/bin/healthcheck" ]
 ENTRYPOINT ["./opg-sirius-maintenance"]
