@@ -8,7 +8,7 @@ COPY yarn.lock .
 
 RUN yarn && yarn build
 
-FROM golang:1.26@sha256:f96cc555eb8db430159a3aa6797cd5bae561945b7b0fe7d0e284c63a3b291609 AS build-env
+FROM golang:1.26@sha256:d52df9c279840adf958d017ebb275651ed8338b953d39817bc3633a2e6b1bbcc AS build-env
 
 RUN adduser \
     --disabled-password \
