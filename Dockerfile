@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.12 AS asset-env
+FROM node:24-alpine3.23@sha256:595398b0081eacda8e1c4c5b97b76cd1020e4d58a8ebcb4843b9bca1e79e7436 AS asset-env
 
 WORKDIR /app
 
