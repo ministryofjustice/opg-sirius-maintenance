@@ -4,8 +4,8 @@ all: lint gosec build test
 lint: setup-directories
 	docker compose run --rm go-lint
 
-gosec:
-	docker compose run --rm gosec
+gosec: setup-directories
+    docker compose run --rm gosec
 
 build:
 	docker compose build maintenance
