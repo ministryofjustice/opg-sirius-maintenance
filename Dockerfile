@@ -28,7 +28,8 @@ COPY go.sum .
 
 RUN go mod download
 
-COPY . .
+COPY main.go .
+COPY static static
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -a -installsuffix cgo -o /go/bin/opg-sirius-maintenance
 
