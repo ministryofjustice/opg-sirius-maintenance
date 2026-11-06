@@ -1,0 +1,10 @@
+.git
+.github
+.cache
+.vscode
+node_modules
+test-results
+Dockerfile
+docker-compose.yml
+Makefile
+README.md
